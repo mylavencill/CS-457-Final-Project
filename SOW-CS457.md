@@ -32,8 +32,8 @@
 
 ### 2.1 Message Transport & Serialization Format
 - **Transport Protocol:** TCP
-- **Serialization Format:** [JSON / Fixed-Header Binary / Delimited Text]
-- **Framing Mechanism:** [e.g., Newline-delimited (`\n`) JSON payloads OR 4-byte big-endian length prefix]
+- **Serialization Format:** JSON
+- **Framing Mechanism:** Newline-delimited JSON payloads. 
 
 ### 2.2 Message Schema Definitions
 
@@ -45,24 +45,22 @@
 5. `STATE_UPDATE` (Server -> Clients): Broadcast current game board / state and active player turn.
 6. `GAME_OVER` (Server -> Clients): Victory / Draw notification with final scores.
 7. `ERROR` (Server -> Client): Invalid move or malformed packet error.
+8. `DISCONNECT` (Client -> Server): Server broadcasts final game outcome (Winner / Draw / Forfeit) and final scores.
 
 #### Example JSON Protocol Schema:
 ```json
 {
   "msg_type": "MOVE",
-  "player_id": "Player_1",
-  "payload": {
-    "row": 0,
-    "col": 2
-  },
-  "timestamp": 1727000000
+  "role': "X",
+  "row": 1,
+  "col": 1
 }
 ```
 
 ---
 
 ### 2.3 Game State Machine (FSM) Design (Sprint 1 Deliverable)
-- **State Transitions:** Detail state flow: `INIT` -> `WAITING_FOR_PLAYERS` -> `PLAYER_TURN` -> `EVALUATE_MOVE` -> `CHECK_WIN_DRAW` -> `GAME_OVER` -> `CLEANUP`.
+- **State Transitions:** Detail state flow: `INIT` -> `WAITING_FOR_PLAYERS` -> `GAME_START` -> `PLAYER_TURN` -> `EVALUATE_MOVE` -> `GAME_OVER` -> `CLEANUP`.
 
 ---
 
