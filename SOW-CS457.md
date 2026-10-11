@@ -51,7 +51,7 @@
 ```json
 {
   "msg_type": "MOVE",
-  "role': "X",
+  "role": "X",
   "row": 1,
   "col": 1
 }
