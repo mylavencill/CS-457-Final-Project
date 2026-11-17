@@ -7,7 +7,7 @@ stateDiagram-v2
     INIT --> WAITING_FOR_PLAYERS : Server Started and Listening
     
     WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS : Client 1 Connects
-    WAITING_FOR_PLAYERS --> GAME_START : Client 2 Connects
+    WAITING_FOR_PLAYERS --> GAME_START : Client 2 Connects, or Both Players Still Connected After CLEANUP
     
     GAME_START --> PLAYER_TURN : Initialize Board, Assign Roles, Announce Turn
     
@@ -24,6 +24,6 @@ stateDiagram-v2
     
     GAME_OVER --> CLEANUP : Announce Results
     
-    CLEANUP --> WAITING_FOR_PLAYERS : Reset Board and State
+    CLEANUP --> WAITING_FOR_PLAYERS : Reset Board, Keep Scores Unless a Player Left
     CLEANUP --> [*] : Server Shutdown
 ```
