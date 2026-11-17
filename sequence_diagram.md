@@ -24,6 +24,10 @@ sequenceDiagram
             S-->>C1: {"msg_type": "GAME_OVER", "reason": "WIN", "winner": "X", "scores": {"X":1, "O":0}}\n
             S-->>C2: {"msg_type": "GAME_OVER", "reason": "WIN", "winner": "X", "scores": {"X":1, "O":0}}\n
             Note over S: Clear board for next match
+            S-->>C1: {"msg_type": "GAME_START", "assigned_role": "X", "opponent_name": "Player 2"}\n
+            S-->>C2: {"msg_type": "GAME_START", "assigned_role": "O", "opponent_name": "Player 1"}\n
+            S-->>C1: {"msg_type": "STATE_UPDATE", "board": [...], "active_turn": "X"}\n
+            S-->>C2: {"msg_type": "STATE_UPDATE", "board": [...], "active_turn": "X"}\n
             
         else Normal Move (No Win/Draw)
             Note over S: active_turn = "O"
